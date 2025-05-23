@@ -39,17 +39,16 @@ class DingoDisplayNode:
     def update_battery_percentage(self, message):
 
         # max_voltage and min_voltage for 4s lipo battery
-        max_voltage = 16.8
-        min_voltage = 14.0
+        max_voltage = 16.8 
+        min_voltage = 14.0 
 
         # Ensure the received voltage is within expected bounds
         battery_voltage_level = max(min(message.battery_voltage_level, max_voltage), min_voltage)
 
         # Convert to percentage
         self.battery_percentage = (battery_voltage_level - min_voltage) / (max_voltage - min_voltage)
-
-        # rospy.loginfo("Battery voltage level: {}".format(message.battery_voltage_level))
-        # rospy.loginfo("Updated battery percentage: {:.2f}%".format(self.battery_percentage * 100))
+        rospy.loginfo("Battery voltage level: {}".format(message.battery_voltage_level))
+        rospy.loginfo("Updated battery percentage: {:.2f}%".format(self.battery_percentage * 100))
 
     def run(self):
         try:
